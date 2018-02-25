@@ -4,6 +4,6 @@ var express = require('express');
 var app = express();
 var path = require('path');
 app.use('/',function(req,res){
-    res.sendFile(path.resolve(__dirname,'index.html'))
+    res.sendFile(path.resolve(__dirname,'app/template/index.html'))
 })
 app.listen(port)
