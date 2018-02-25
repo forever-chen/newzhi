@@ -5,6 +5,9 @@ body,p,h1,h2,h3,h4,h5,h6,ul,dl,li,dt,dd,input,form,span{
 	font-family:Arial,"微软雅黑","黑体";
 	font-size:14px;
 }
+html{
+    min-width: 1519.2px;
+}
 img{
     border:none;
     margin:0;
