@@ -56,7 +56,7 @@ a:hover{
     padding: 0 50px;
     color: white;
     display: inline-block;
-    line-height: 50px;
+    line-height: 47px;
 
 }
 .navcontent a:first-child{
@@ -179,6 +179,9 @@ a:hover{
     overflow: hidden;
     border-bottom: 1px dashed #7f7f7f;
 }
+.middlecontent .first .shenbao .list li:hover span{
+    color: #1b8ad1;
+}
 .middlecontent .first .shenbao .list li .date{
     display: block;
     float: right;
@@ -195,7 +198,7 @@ a:hover{
     padding-left: 10px;
 }
 .middlecontent .first .shenbao .list li .left a:hover{
-
+    color: #1b8ad1;    
 }
 /* 内容第一栏结束 */
 /* 内容专题栏开始 */
