@@ -241,4 +241,20 @@ $(function(){
                     });
     
     });
-// 专业轮播结束    
+// 专业轮播结束   
+
+// 头部时间显示
+
+var changeTime = $('.time');
+console.log(changeTime)
+setInterval(function(){
+        var time = new Date();
+        var y = time.getFullYear()+"年";
+        var week = time.getDay();
+        var mou = (Number(time.getMonth())+1<10?'0'+(Number(time.getMonth())+1):(Number(time.getMonth()+1)))+"月";
+        var day = (Number(time.getDate())<10?'0'+(Number(time.getDate())):(Number(time.getDate())))+"日";
+        var hour = (Number(time.getHours())<10?'0'+(Number(time.getHours())):(Number(time.getHours())))+":";
+        var min = (Number(time.getMinutes())<10?'0'+(Number(time.getMinutes())):(Number(time.getMinutes())))+":";
+        var s = (Number(time.getSeconds())<10?'0'+(Number(time.getSeconds())):(Number(time.getSeconds())));
+        changeTime.html("<p>"+hour+min+s+"&nbsp;&nbsp;&nbsp;"+y+mou+day+"<p>")
+},1000)

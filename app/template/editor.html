@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!-- <script type="text/javascript" src="../js/jquery.js"></script> -->
+<script type="text/javascript" src="../wangEditor/release/wangEditor.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="../wangEditor/release/wangEditor.min.css">
+
+<body>
+    <div id="editor"></div>
+    <button id="btn1">销毁编辑器</button>
+    <button id="btn2">恢复编辑器</button>
+    <button id="btn3">追加内容</button>
+    <button id="btn4">清空内容</button>
+</body>
+<script>
+    var editor = new wangEditor('#editor');
+    editor.customConfig.onchange = function (html) {
+        // 监控变化
+        console.log(html)
+    }
+    // 关闭粘贴样式的过滤
+    editor.customConfig.pasteFilterStyle = false
+    editor.customConfig.pasteTextHandle = function (content) {
+        // content 即粘贴过来的内容（html 或 纯文本），可进行自定义处理然后返回
+        return content + '<p>在粘贴内容后面追加一行</p>'
+    }
+    // 使用 base64 保存图片
+    editor.customConfig.uploadImgShowBase64 = true  
+    // 限制上传图片大小为3M 
+    editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
+    editor.create();
+    
+    console.log(editor)
+    $('#btn1').click(function () {
+        // 禁用编辑器
+        editor.$textElem.attr('contenteditable', false)
+    });
+
+    $('#btn2').click(function () {
+        // 开启编辑器
+        editor.$textElem.attr('contenteditable', true)
+        
+    });
+    $('#btn3').click(function () {
+        // 创建编辑器之后继续追加内容
+        editor.txt.append('<p>追加的内容</p>')
+    });
+    $('#btn4').click(function () {
+        // 创建编辑器之后继续追加内容
+        editor.txt.html('');
+    });
+    // 初始化编辑器的内容
+    editor.txt.html('<p>要初始化的内容</p>');
+    // 调整编辑器的层级，默认是1000
+    editor.customConfig.zIndex = 100
+    
+</script>
+</html>

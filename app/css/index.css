@@ -26,6 +26,10 @@ a:hover{
     height: 132px;
     background: url(../images/headoutbg.jpg) repeat-x;
 }
+.header .time{
+    text-align: right;
+    padding-right: 30px;
+}
 .headercontent{
     width: 1000px;
     height: 150px;
@@ -256,7 +260,7 @@ a:hover{
 /* 底部栏开始 */
 .footer{
     width: 100%;
-    height: 150px;
+    height: 170px;
     background: #0b4c7e;
 }
 .footer .footercontent{
@@ -264,10 +268,31 @@ a:hover{
     height: 100%;
     padding: 20px 30px;
     margin: 0 auto;
-    text-align: center;
+    /* text-align: center; */
     color: white;
 }
 .footer .footercontent p{
     line-height: 25px;
+}
+.footer .footercontent .bottom .title{
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.footer .footercontent .bottom{
+    width: 27%;
+    padding: 10px 15px;
+    float: left;
+    overflow: hidden;
+    box-sizing: border-box;
+    line-height: 30px;
+}
+.footer .footercontent .bottom:first-child{
+    width: 19%;
+    padding: 0;
+    position: relative;
+}
+.footer .footercontent .bottom img{
+    width: 70%;
 }
 /* 底部栏结束 */
