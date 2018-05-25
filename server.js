@@ -9,12 +9,25 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
+// 获取内容接口
+// app.use(function(req,res){
+//     res.setHeader("Content-Type","text/html;charset=utf-8")
+// })
+app.use('/getData',function(req,res){
+    console.log(req.query.data,req.query.type);
+    var data = require('./app/json/data.json');
+    console.log(data.data.shenbao[req.query.type][req.query.data])
+    res.send(data.data.shenbao[req.query.type][req.query.data])
+})
 app.use('/editor',function(req,res){
     res.sendFile(path.resolve(__dirname,'app/template/editor.html'))
 })
 app.use(bodyParser.json());
-app.use('/shenbao',function(req,res){
+app.use('/index.html',function(req,res){
     res.sendFile(path.resolve(__dirname,'app/template/shenbao.html'))
+})
+app.use('/shenbao1',function(req,res){
+    res.sendFile(path.resolve(__dirname,'app/template/shenbao1.html'))
 })
 app.use('/detail/*',function(req,res){
     var params = req._parsedOriginalUrl.path.slice(8)
@@ -22,8 +35,8 @@ app.use('/detail/*',function(req,res){
     res.sendFile(path.resolve(__dirname,'app/template/detail.html'))
 })
 app.use('/',function(req,res){
-    console.log(req.url)
-    res.sendFile(path.resolve(__dirname,'app/template/index.html'))
+    // console.log(req.url)
+    res.sendFile(path.resolve(__dirname,'app/template/first.html'))
 })
 
 app.listen(port)

@@ -1,0 +1,38 @@
+{
+    "data":{
+        "shenbao":{
+            "schoolManage":{
+                "first":[1,2,3,4],
+                "second":"办学行为",
+                "third":"管理队伍",
+                "four":"管理水平"
+            },
+            "base":{
+                "first":"校园校舍",
+                "second":"校园设施",
+                "third":"师资队伍",
+                "four":"信息话建设",
+                "five":"办学环境"
+
+            },
+            "coorate":{
+                "first":"办学模式",
+                "second":"顶岗实习",
+                "third":"专家参与"
+            },
+            "teach":{
+                "first":"德育工作",
+                "second":"专家建设",
+                "third":"模式创新",
+                "four":"课程体系",
+                "five":"师资队伍建设"
+            },
+            "banefit":{
+                "first":"招生就业",
+                "second":"教育成果",
+                "third":"服务社会",
+                "four":"社会贡献"
+            }
+        }
+    }
+}

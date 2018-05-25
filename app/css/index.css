@@ -25,6 +25,8 @@ a:hover{
     width: 100%;
     height: 132px;
     background: url(../images/headoutbg.jpg) repeat-x;
+    position: relative;
+    z-index: 20;
 }
 .header .time{
     text-align: right;
@@ -46,30 +48,65 @@ a:hover{
     position: relative;
     top: 10px;
 }
+#op{
+    width: 100px;
+    height: 100px;
+    background: blue;
+}
 /* 头部结束 */
 /* 导航开始 */
 .nav{
     width: 100%;
     height: 50px;
     background: url(../images/navbg1.gif) repeat-x;
+    position: relative;
+    z-index: 10;
 }
 .navcontent{
     width: 1000px;
     height: 150px;
-    background:url()px;
+    /* background:url()px; */
     height: 100%;
     margin: 0 auto;
     font-size: 16px;
 }
 .navcontent a{
-    padding: 0 50px;
+    /* padding: 0 50px; */
+    width: 13.8%;
+    text-align: center;
     color: white;
     display: inline-block;
     line-height: 47px;
-
+    position: relative;
 }
-.navcontent a:first-child{
-    padding-left: 10px;
+.navcontent a:hover .down{
+    top: 100%;
+    transition: all 1s;
+}
+.navcontent span{
+    display: inline-block;
+    width: 100%;
+    height: 44px;
+    border-right: 1px dashed #ccc;
+}
+.navcontent span.last{
+    border-right: 0;
+}
+.navcontent a:hover span{
+    background: #137ABD;
+}
+.navcontent a .down{
+    top: -230px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    text-align: center;
+    z-index: -1;
+    background: #93B9D1;
+}
+.navcontent a .down li{
+    border-bottom: 1px solid #fff;
 }
 /* 导航结束 */
 /* banner开始 */
@@ -80,7 +117,14 @@ a:hover{
     height: 300px;
     margin: 0 auto;
 }
-#banner { position: relative; width: 100%; height: 100%; border: 1px solid #666; overflow: hidden; }
+.bannerbox .video{
+    width: 49.5%;
+    height: 100%;
+    background: blue;
+    display: inline-block;;
+}
+#banner { position: relative; width: 50%; height: 100%; border: 1px solid #666; overflow: hidden;display: inline-block; box-sizing: border-box; }
+
 
 #banner_list img { 
     border: 0px;
@@ -101,6 +145,9 @@ a:hover{
 #banner ul li.on { background-color: #000; }
 
 #banner_list a { position: absolute; }
+#my-video{
+    object-fit:fill;
+}
 /* banner结束 */
 .middlecontent{
     width: 100%;
@@ -138,21 +185,21 @@ a:hover{
     margin-top: 25px;
     margin-left: 20px;
 }
-.middlecontent .first{
+.middlecontent .firstLine{
     margin: 0 auto;
     width: 1000px;
     height: 220px;
     background:url()px;
 }
-.middlecontent .first .shenbao{
+.middlecontent .firstLine .shenbao{
     width: 49%;
     height: 100%;
     float: left;
 }
-.middlecontent .first .shenbao:first-child{
+.middlecontent .firstLine .shenbao:first-child{
     margin-right: 2%;
 }
-.middlecontent .first .shenbao .title{
+.middlecontent .firstLine .shenbao .title{
     height: 30px;
     line-height: 30px;
     width: 100%;
@@ -160,7 +207,7 @@ a:hover{
     color: #024a78;
     font-size: 16px;
 }
-.middlecontent .first .shenbao .title .icon{
+.middlecontent .firstLine .shenbao .title .icon{
     width: 13px;
     float: left;
     margin-left: 5px;
@@ -168,36 +215,36 @@ a:hover{
     background: url(../images/news.gif) 0 5px no-repeat;
     margin-right: 15px;
 }
-.middlecontent .first .shenbao .title .notice{
+.middlecontent .firstLine .shenbao .title .notice{
     background: url(../images/notice.gif) 0 5px no-repeat;
     width: 19px;
 }
-.middlecontent .first .shenbao .title .more{
+.middlecontent .firstLine .shenbao .title .more{
     width: 50px;
     height: 100%;
     float: right;
     color: #bbbbbb;
     font-size: 14px;
 }
-.middlecontent .first .shenbao .list{
+.middlecontent .firstLine .shenbao .list{
     border: 1px solid #0093c0;
     padding: 17px 5px 13px 5px;
 }
-.middlecontent .first .shenbao .list li{
+.middlecontent .firstLine .shenbao .list li{
     height: 30px;
     line-height: 30px;
     overflow: hidden;
     border-bottom: 1px dashed #7f7f7f;
 }
-.middlecontent .first .shenbao .list li:hover span{
+.middlecontent .firstLine .shenbao .list li:hover span{
     color: #1b8ad1;
 }
-.middlecontent .first .shenbao .list li .date{
+.middlecontent .firstLine .shenbao .list li .date{
     display: block;
     float: right;
     color: #393939;
 }
-.middlecontent .first .shenbao .list li .left a{
+.middlecontent .firstLine .shenbao .list li .left a{
     display: block;
     width: 280px;
     float: left;
@@ -207,7 +254,7 @@ a:hover{
     background: url(../images/icon3.jpg) 0 12px no-repeat;
     padding-left: 10px;
 }
-.middlecontent .first .shenbao .list li .left a:hover{
+.middlecontent .firstLine .shenbao .list li .left a:hover{
     color: #1b8ad1;    
 }
 /* 内容第一栏结束 */
@@ -262,6 +309,8 @@ a:hover{
     width: 100%;
     height: 170px;
     background: #0b4c7e;
+    background: url(../images/headoutbg.jpg);
+    background-size: cover
 }
 .footer .footercontent{
     width: 1000px;
@@ -269,7 +318,7 @@ a:hover{
     padding: 20px 30px;
     margin: 0 auto;
     /* text-align: center; */
-    color: white;
+    color: #333;
 }
 .footer .footercontent p{
     line-height: 25px;
