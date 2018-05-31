@@ -1,6 +1,8 @@
 // 轮播转动开始
 var t = n = 0, count;
 
+
+
 $(document).ready(function () {
 
         count = $("#banner_list a").length;
