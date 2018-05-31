@@ -119,7 +119,7 @@ app.use('/detail/*', function (req, res) {
 })
 var util = {
     objForEach: function (obj, fn) {
-        let key, result
+        var key, result
         for (key in obj) {
             if (obj.hasOwnProperty(key)) {
                 result = fn.call(obj, key, obj[key])
@@ -134,7 +134,7 @@ app.use('/upload', function (req, res, err) {
     if(err){
         console.log(err);
     }
-    let imgLinks = []
+    var imgLinks = []
     const form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
         if (err) {
