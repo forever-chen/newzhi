@@ -74,7 +74,8 @@
 }
 
 .navbox .title {
-    margin: 10px 0;
+    /* margin: 10px 0; */
+    margin-bottom: 10px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
     text-align: center;
@@ -149,4 +150,10 @@
 
 .navContent:last-child {
     border-bottom: none;
+}
+.middlecontent{
+    background: url(../images/beijing.jpg) no-repeat;
+    background-size: 2000px 800px;
+    background-position: center;
+    margin: 0;
 }

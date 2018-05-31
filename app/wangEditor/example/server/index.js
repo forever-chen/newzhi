@@ -37,11 +37,11 @@ function saveFiles(req) {
                 reject('formidable, form.parse err', err.stack)
             }
             // 存储图片的文件夹
-            const storePath = path.resolve(__dirname, '..', 'upload-files')
+            const storePath = path.resolve(__dirname, 'upload-files')
             if (!fs.existsSync(storePath)) {
                 fs.mkdirSync(storePath)
             }
-
+            app.use(express.static(__dirname,'upload-files'));
             // 遍历所有上传来的图片
             util.objForEach(files, (name, file) => {
                 // 图片临时位置
@@ -68,7 +68,7 @@ function saveFiles(req) {
 }
 
 // 上传图片
-router.post('/upload-img', function* () {
+router.post('/upload', function* () {
     const ctx = this
     const req = ctx.req
     const res = ctx.res

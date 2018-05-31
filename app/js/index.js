@@ -294,9 +294,37 @@ function moveF() {
 
         //setTimeout("moveF()",delay);
 }
-var itl = setInterval("moveF()", delay);
-obj.onmouseover = function () { clearInterval(itl) }
-obj.onmouseout = function () { itl = setInterval("moveF()", delay) }
+if (obj) {
+        var itl = setInterval("moveF()", delay);
+        obj.onmouseover = function () { clearInterval(itl) }
+        obj.onmouseout = function () { itl = setInterval("moveF()", delay) }
+}
 function hidead() {
         document.getElementById("op").style.display = "none";
 }
+
+// 顶部导航跳转
+$('.category').click(function () {
+        window.location.href = '/index.html';
+        window.name = $(this).find('span').text();
+})
+function getdatalist() {
+        $.ajax({
+                url: '/getContent',
+                type: 'get',
+                dataType:'json',
+                success: function (res) {
+                        var contentListOne = '';
+                        res.news&&res.news.length>0&&res.news.slice(0,5).map(function (item) {
+                                contentListOne += "<li><span class='left'><a href='/detail/" + item.title + "'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
+                        })
+                        $('.firstLine .news .list').html(contentListOne);
+                        var contentListTwo = '';
+                        res.notice&&res.notice.length>0&&res.notice.slice(0,5).map(function (item) {
+                                contentListTwo += "<li><span class='left'><a href='/detail/" + item.title + "'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
+                        })
+                        $('.firstLine .notice .list').html(contentListTwo);
+                }
+        })
+}
+getdatalist()

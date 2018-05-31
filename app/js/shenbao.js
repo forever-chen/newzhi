@@ -3,6 +3,7 @@ $(function() {
     $('.right').on('click', '.ember', function() {
         $(".navbox .right").html("<embed height='700' width='100%' wmode='transparent' src='http://www.tyitc.cn:1004/Site/upload/video/20180301/6365550117657976176603828.swf' type='application/x-shockwave-flash' play='true' loop='true' menu='true'>")
     })
+    
     $(".subNav").click(function() {
         if ($(this).attr("id")) {
             initType = $(this).attr("id");
@@ -17,7 +18,6 @@ $(function() {
                 var div = $(this).next(".navContent").html();
                 $(".navbox .right").html("<div class='navContent'>" + div + "</div>")
             }
-
         }
         $(".navContent li").click(function() {
             $.ajax({
@@ -32,4 +32,11 @@ $(function() {
             })
         })
     })
+    if(window.name){
+        $('.subNav').each(function(index,item){
+            if($(this).text()==window.name){
+                $(this).click();
+            }
+        })
+    }
 })
