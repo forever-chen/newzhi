@@ -79,7 +79,7 @@
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
     text-align: center;
-    padding: 20px;
+    padding-bottom: 20px;
     color: red;
     font-size: 30px;
 }
@@ -155,5 +155,6 @@
     background: url(../images/beijing.jpg) no-repeat;
     background-size: 2000px 800px;
     background-position: center;
+    padding-top: 20px;
     margin: 0;
 }
