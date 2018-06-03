@@ -124,6 +124,7 @@ a:hover{
     margin: 0 auto;
 }
 .bannerbox .video{
+    overflow: hidden;
     width: 49.5%;
     height: 100%;
     background: blue;
@@ -150,7 +151,7 @@ a:hover{
 
 #banner ul li.on { background-color: #000; }
 
-#banner_list a { position: absolute; }
+#banner_list a { position: absolute;width: 100%; }
 #my-video{
     object-fit:fill;
 }
@@ -376,7 +377,8 @@ a:hover{
     height: 170px;
     background: #0b4c7e;
     background: url(../images/headoutbg.jpg);
-    background-size: cover
+    background-size: contain;
+    overflow: hidden;
 }
 .footer .footercontent{
     width: 1000px;

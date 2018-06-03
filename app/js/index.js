@@ -35,10 +35,12 @@ $(document).ready(function () {
 
         });
 
-        // t = setInterval("showAuto()", 2000);
+        t = setInterval("showAuto()", 2000);
 
         $("#banner").hover(function () { clearInterval(t) });
-
+        $("#banner").mouseout(function(){
+                t = setInterval("showAuto()", 2000);
+        })
 })
 
 
