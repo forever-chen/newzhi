@@ -35,12 +35,12 @@ $(document).ready(function () {
 
         });
 
-        t = setInterval("showAuto()", 2000);
+        t = setInterval("showAuto()", 3000);
 
-        $("#banner").hover(function () { clearInterval(t) });
-        $("#banner").mouseout(function(){
-                t = setInterval("showAuto()", 2000);
-        })
+        // $("#banner").hover(function () { clearInterval(t) });
+        // $("#banner").mouseout(function(){
+        //         t = setInterval("showAuto()", 2000);
+        // })
 })
 
 
@@ -312,6 +312,13 @@ $('.category').click(function () {
         window.location.href = '/index.html';
         window.name = $(this).find('span').text();
 })
+// 首页标签跳转申报页面
+$('.shenbaoline').on('click','.list li',function () {
+        console.log($(this).parent('.list').prev().find('b').text())
+        window.name = $(this).parent().prev().find('b').text();
+        window.location.href = '/index.html';
+        
+})
 function getdatalist() {
         $.ajax({
                 url: '/getContent',
@@ -322,12 +329,12 @@ function getdatalist() {
                         res.news&&res.news.length>0&&res.news.slice(0,5).map(function (item) {
                                 contentListOne += "<li><span class='left'><a href='/detail/" + item.title + "'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
                         })
-                        $('.firstLine .news .list').html(contentListOne);
+                        $('.apiLine .news .list').html(contentListOne);
                         var contentListTwo = '';
                         res.notice&&res.notice.length>0&&res.notice.slice(0,5).map(function (item) {
                                 contentListTwo += "<li><span class='left'><a href='/detail/" + item.title + "'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
                         })
-                        $('.firstLine .notice .list').html(contentListTwo);
+                        $('.apiLine .notice .list').html(contentListTwo);
                 }
         })
 }

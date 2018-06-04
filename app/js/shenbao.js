@@ -1,7 +1,17 @@
 $(function() {
     var initType = 'schoolManage';
     $('.right').on('click', '.ember', function() {
-        $(".navbox .right").html("<embed height='700' width='100%' wmode='transparent' src='http://www.tyitc.cn:1004/Site/upload/video/20180301/6365550117657976176603828.swf' type='application/x-shockwave-flash' play='true' loop='true' menu='true'>")
+        var fileNameType = $(this).attr('type');
+        var fileName = $(this).find('span').eq(0).text();
+        console.log(fileNameType,fileName)
+        if(fileNameType){
+            var srcName = '../ziliao/'+fileNameType+'/'+fileName+'.swf';
+            $(".navbox .right").html("<embed height='700' width='100%' wmode='transparent' src="+srcName+" type='application/x-shockwave-flash' play='true' loop='true' menu='true'>")
+        }else{
+            fileName = $(this).text(); 
+            var srcName = '../ziliao/'+fileName+'.swf';
+            $(".navbox .right").html("<embed height='700' width='100%' wmode='transparent' src="+srcName+" type='application/x-shockwave-flash' play='true' loop='true' menu='true'>")
+        }
     })
     
     $(".subNav").click(function() {
@@ -27,7 +37,13 @@ $(function() {
                 data: "data=" + $(this).attr("class") + '&' + 'type=' + initType,
                 success: function(data) {
                     console.log(typeof data);
-                    $(".navbox .right").html("<div class='ember'><span href='javascript:;'>" + data + "</span><span class='date'>2018-05-22</span></div>");
+                    var str='';
+                    if(data&&data.length>0){
+                        data.map(function(item){
+                            str+="<div type="+initType+" class='ember'><span href='javascript:;'>" + item + "</span><span class='date'>2018-05-22</span></div>"
+                        })
+                    }
+                    $(".navbox .right").html(str);
                 }
             })
         })

@@ -31,7 +31,7 @@ var formatDate = function (date) {
 // 获取资料接口
 app.use('/getData', function (req, res) {
     var data = require('./app/json/data.json');
-    res.send(data.data.shenbao[req.query.type][req.query.data])
+    res.send(data.data.shenbao[req.query.type][req.query.data]);
 })
 // 获取文章内容接口
 app.use('/getContent', function (req, res) {

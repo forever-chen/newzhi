@@ -196,35 +196,36 @@ a:hover{
     margin: 0 auto;
     width: 1000px;
     height: 220px;
-    background:url()px;
 }
 .middlecontent .firstLine .shenbao{
     width: 49%;
     height: 100%;
+    margin-top: 20px;
     float: left;
 }
-.middlecontent .firstLine .shenbao:first-child{
+.middlecontent .firstLine .news{
     margin-right: 2%;
+    
 }
 .middlecontent .firstLine .shenbao .title{
     height: 30px;
     line-height: 30px;
     width: 100%;
-    background: url(../images/panbg2.jpg) repeat-x;
+    /* background: url(../images/panbg2.jpg) repeat-x; */
+    border-bottom: 1px solid #1b8ad1;
     color: #024a78;
     font-size: 14px;
 }
 .middlecontent .firstLine .shenbao .title .icon{
-    width: 13px;
+    width: 3px;
+    height: 15px;
     float: left;
+    margin-top: 8px;
     margin-left: 5px;
-    height: 100%;
-    background: url(../images/news.gif) 0 5px no-repeat;
-    margin-right: 15px;
-}
-.middlecontent .firstLine .shenbao .title .notice{
-    background: url(../images/notice.gif) 0 5px no-repeat;
-    width: 19px;
+    /* height: 100%; */
+    /* background: url(../images/news.gif) 0 5px no-repeat; */
+    background: #1b8ad1;
+    margin-right: 10px;
 }
 .middlecontent .firstLine .shenbao .title .more{
     width: 50px;
@@ -234,7 +235,7 @@ a:hover{
     font-size: 14px;
 }
 .middlecontent .firstLine .shenbao .list{
-    border: 1px solid #0093c0;
+    /* border: 1px solid #0093c0; */
     padding: 17px 5px 13px 5px;
 }
 .middlecontent .firstLine .shenbao .list li{
@@ -253,7 +254,7 @@ a:hover{
 }
 .middlecontent .firstLine .shenbao .list li .left a{
     display: block;
-    width: 280px;
+    width: 70%;
     float: left;
     height: 30px;
     overflow: hidden;
@@ -263,6 +264,21 @@ a:hover{
 }
 .middlecontent .firstLine .shenbao .list li .left a:hover{
     color: #1b8ad1;    
+}
+.middlecontent  .shenbaoline{
+    height: 190px;
+}
+.middlecontent  .shenbaoline .shenbao{
+    width: 30%;
+    margin-right: 5%;
+    height: auto;
+}
+.middlecontent  .shenbaoline .shenbao:last-child{
+    margin-right: 0;
+}
+.middlecontent .shenlineTwo .shenbao{
+    width: 48%;
+    margin-right: 4%;
 }
 /* 内容第一栏结束 */
 /* 内容专题栏开始 */
