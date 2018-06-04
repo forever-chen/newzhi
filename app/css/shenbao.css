@@ -1,6 +1,6 @@
 .subNavBox {
     width: 200px;
-    min-height: 400px;
+    min-height: 365px;
     border: solid 1px #e5e3da;
     float: left
 }
@@ -164,4 +164,10 @@
     padding-top: 20px;
     min-height: 600px;
     margin: 0;
+}
+.crumbs a{
+    color: #000;
+}
+.crumbs a:hover{
+    color: #1b8ad1;
 }
