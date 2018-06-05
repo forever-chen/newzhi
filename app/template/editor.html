@@ -7,7 +7,8 @@
     <title>文章内容编辑</title>
 </head>
 <script type="text/javascript" src="../wangEditor/release/wangEditor.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script> -->
+<script src="../js/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="../wangEditor/release/wangEditor.min.css">
 <link rel="stylesheet" href="../css/edite.css">
 <body>
@@ -44,7 +45,6 @@
     var editor = new wangEditor('#editor');
     editor.customConfig.onchange = function (html) {
         // 监控变化
-        console.log(html)
     }
     //上传图片
     editor.customConfig.uploadImgServer = '/upload'
@@ -63,7 +63,6 @@
     // 限制上传图片大小为3M 
     //editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
     editor.create();
-    console.log( $('.w-e-text-container'))
     $('.w-e-text-container').attr('height','500px');
     $('#btn1').click(function () {
         // 禁用编辑器
@@ -118,17 +117,17 @@
         $.ajax({
             url:'/getContent',
             type:'get',
+            cache:false,
             dataType:'json',
             success:function(res){
                 var contentListOne = '<li class="title"><b>校园快讯</b></li>';
                 res.news&&res.news.map(function(item){
-                    contentListOne += '<li class="title">'+item.title+"<span class='deleteData' type='news'>删除</span></li>"
+                    contentListOne += '<li class="title"><span class="leftTitle">'+item.title+"</span><span class='deleteData' type='news'>删除</span></li>"
                 })
                 var contentListTwo = '<li class="title next"><b>通知公告</b></li>';
                 res.notice&&res.notice.map(function(item){
-                    contentListTwo += '<li class="title">'+item.title+"<span class='deleteData' type='notice'>删除</span></li>"
+                    contentListTwo += '<li class="title"><span class="leftTitle">'+item.title+"</span><span class='deleteData' type='notice'>删除</span></li>"
                 })
-                console.log(contentListOne+contentListTwo)
                 $('.contentList').html(contentListOne+contentListTwo);
             }
         })
@@ -146,7 +145,6 @@
                 getdatalist();
             },
             error:function(err){
-                console.log(err)
                 getdatalist();
             }
 

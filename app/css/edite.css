@@ -90,6 +90,11 @@
     color: red;
     display: none;
 }
+.contentList .leftTitle{
+    width: 70%;
+    display: inline-block;
+    overflow: hidden;
+}
 .contentList .title{
     cursor: pointer;
     padding: 5px 0;

@@ -244,12 +244,12 @@ a:hover{
     overflow: hidden;
     border-bottom: 1px dashed #7f7f7f;
 }
-.middlecontent .firstLine .shenbao .list li:hover{
+/* .middlecontent .firstLine .shenbao .list li:hover{
     box-shadow: 5px 5px 7px 0px #000;
     position: relative;
     z-index: 10;
     background: #000;
-}
+} */
 .middlecontent .firstLine .shenbao .list li:hover span{
     color: #1b8ad1;
 }

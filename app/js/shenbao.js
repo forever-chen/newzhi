@@ -3,7 +3,7 @@ $(function() {
     $('.right').on('click', '.ember', function() {
         var fileNameType = $(this).attr('type');
         var fileName = $(this).find('span').eq(0).text();
-        console.log(fileNameType,fileName)
+        // console.log(fileNameType,fileName)
         if(fileNameType){
             var srcName = '../ziliao/'+fileNameType+'/'+fileName+'.swf';
             $(".navbox .right").html("<embed height='700' width='100%' wmode='transparent' src="+srcName+" type='application/x-shockwave-flash' play='true' loop='true' menu='true'>")
@@ -22,7 +22,7 @@ $(function() {
         $(this).addClass('currentDd currentDt').next(".navContent").slideToggle(300).siblings(".navContent").slideUp(500);
         if ($(this).text() !== '佐证材料') {
             if ($(this).hasClass('index')) {
-                console.log($(this).text())
+                // console.log($(this).text())
                 $(".navbox .right").html("<div class='navContent'><div class='ember'>" + $(this).text() + "</div></div>");
             } else {
                 var div = $(this).next(".navContent").html();
@@ -36,7 +36,7 @@ $(function() {
                 cache: false,
                 data: "data=" + $(this).attr("class") + '&' + 'type=' + initType,
                 success: function(data) {
-                    console.log(typeof data);
+                    // console.log(typeof data);
                     var str='';
                     if(data&&data.length>0){
                         data.map(function(item){

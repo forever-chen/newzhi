@@ -248,7 +248,6 @@ $(function () {
 // 头部时间显示
 
 var changeTime = $('.time');
-console.log(changeTime)
 setInterval(function () {
         var time = new Date();
         var y = time.getFullYear() + "年";
@@ -314,7 +313,7 @@ $('.category').click(function () {
 })
 // 首页标签跳转申报页面
 $('.shenbaoline').on('click','.list li',function () {
-        console.log($(this).parent('.list').prev().find('b').text())
+        // console.log($(this).parent('.list').prev().find('b').text())
         window.name = $(this).parent().prev().find('b').text();
         window.location.href = '/index.html';
         
