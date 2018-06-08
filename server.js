@@ -1,4 +1,5 @@
 var http = require('http');
+
 var port = 18080;
 var fs = require('fs')
 var express = require('express');
@@ -6,6 +7,14 @@ const formidable = require('formidable')
 var app = express();
 var multer = require('multer');
 var path = require('path');
+http.createServer((req, res) => {  
+    // 发送 HTTP 头部  
+      // HTTP 状态值: 200 : OK  
+      // 内容类型: text/plain  
+      res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});  
+      // 发送响应数据 "Hello World"  
+        
+  }).listen(8080);  
 // app.use(express.static(path.resolve(__dirname, 'upload-files')));
 // app.use(express.limit(100000000));
 app.use(express.static(path.resolve(__dirname, 'app')))
@@ -28,6 +37,7 @@ var formatDate = function (date) {
     d = d < 10 ? ('0' + d) : d;  
     return y + '-' + m + '-' + d;  
 };  
+
 // 获取资料接口
 app.use('/getData', function (req, res) {
     var data = require('./app/json/data.json');
@@ -57,7 +67,7 @@ app.post('/addContent', function (req, res) {
         })
         console.log()
         fs.writeFile('./app/detailJson/titleJson.json',JSON.stringify(dataJson))
-        fs.writeFile('./app/detailJson/'+reqData.title+'.txt',reqData.content)
+        fs.writeFile('./app/detailJson/'+reqData.type+'/'+reqData.title+'.txt',reqData.content)
         res.send('ok');
     ;
     
@@ -81,7 +91,8 @@ app.use('/deleteData', function (req, res) {
 })
 // 文章详情页获取内容
 app.use('/getDetailContent', function (req, res) {
-    var dirName = './app/detailJson/'+req.query.title+'.txt'
+    var dirName = './app/detailJson/'+req.query.type+'/'+req.query.title+'.txt'
+    console.log(dirName)
     fs.exists(dirName,function(exists){
         if(exists){
             var rs=fs.createReadStream(dirName,'utf-8');
@@ -91,7 +102,7 @@ app.use('/getDetailContent', function (req, res) {
             })
             rs.on('end',function(){
                 console.log(data)
-                res.send(String(data));
+                res.send(JSON.stringify(data));
             })
         }else{
             res.send('<p>文章内容已经被删除……</p>');
@@ -99,8 +110,7 @@ app.use('/getDetailContent', function (req, res) {
     })
     
     // var content = fs.readFileSync('./app/detailJson/'+req.query.title+'.txt','utf-8');
-    
-    
+
 })
 app.use('/editor', function (req, res) {
     res.sendFile(path.resolve(__dirname, 'app/template/editor.html'))
@@ -113,8 +123,9 @@ app.use('/shenbao1', function (req, res) {
     res.sendFile(path.resolve(__dirname, 'app/template/shenbao1.html'))
 })
 app.use('/detail/*', function (req, res) {
-    var params = req._parsedOriginalUrl.path.slice(8)
-    console.log(params)
+    // var params = req._parsedOriginalUrl.path.slice(8)
+    // console.log(params)
+    console.log(11111111111111)
     res.sendFile(path.resolve(__dirname, 'app/template/detail.html'))
 })
 var util = {

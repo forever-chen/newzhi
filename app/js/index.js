@@ -326,12 +326,12 @@ function getdatalist() {
                 success: function (res) {
                         var contentListOne = '';
                         res.news&&res.news.length>0&&res.news.slice(0,5).map(function (item) {
-                                contentListOne += "<li><span class='left'><a href='/detail/" + item.title + "'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
+                                contentListOne += "<li><span class='left'><a href='/detail/" + item.title + "?type=news'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
                         })
                         $('.apiLine .news .list').html(contentListOne);
                         var contentListTwo = '';
                         res.notice&&res.notice.length>0&&res.notice.slice(0,5).map(function (item) {
-                                contentListTwo += "<li><span class='left'><a href='/detail/" + item.title + "'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
+                                contentListTwo += "<li><span class='left'><a href='/detail/" + item.title + "?type=notice'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
                         })
                         $('.apiLine .notice .list').html(contentListTwo);
                 }
