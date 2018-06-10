@@ -305,12 +305,34 @@ if (obj) {
 function hidead() {
         document.getElementById("op").style.display = "none";
 }
-
-// 顶部导航跳转
-$('.category').click(function () {
-        window.location.href = '/index.html';
-        window.name = $(this).find('span').text();
+$('.category').on('click','.down li',function () {
+        // var selectedData = {
+        //         type:$(this).attr('type'),
+        //         childType:$(this).attr('childType'),
+        //         title:$(this).parent().prev().text()
+        // }
+        window.name = "type="+$(this).attr('type')+"&childType="+$(this).attr('childType')+"&title="+$(this).parent().prev().text();
+        window.location.href = '/list';
+        
+}) 
+// 顶部导航跳转 
+$('.category').on('click','span',function () {
+        // var selectedData = {
+        //         title:$(this).text(),     
+        //         type:$(this).next('.down').find('li').eq(0).attr('type'),
+        //         childType:$(this).next('.down').find('li').eq(0).attr('childType')
+        // }
+        if($(this).text()=='学校简介'){
+                window.name = "type=intro&childType=simple&title="+$(this).text();
+        }else{
+                window.name = "type="+$(this).next('.down').find('li').eq(0).attr('type')+"&childType="+$(this).next('.down').find('li').eq(0).attr('childType')+"&title="+$(this).text();
+        }
+        
+        
+        window.location.href = '/list';
+        
 })
+
 // 首页标签跳转申报页面
 $('.shenbaoline').on('click','.list li',function () {
         // console.log($(this).parent('.list').prev().find('b').text())

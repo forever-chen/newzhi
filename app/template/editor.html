@@ -13,32 +13,118 @@
 <link rel="stylesheet" href="../css/edite.css">
 <body>
     <div class="outcontet">
-        <div>
-            <span>请选择发表文章类型：</span>
-            <select name="" id="selectType">
-                <option value="news">校园快讯</option>
-                <option value="notice">通知公告</option>    
-                 
-            </select>
+        <div class="leftnav">
+            <div class="subNavBox">
+                <div class="navContent topnav" style="display: block">
+                    <li type="intro" childType="simple" class="subNav currentDd currentDt" id="schoolManage">学校简介</li>
+                    <li type="newslist" childType="news" class="subNav" id="schoolManage">校园快讯</li>
+                    <li type="newslist" childType="notice" class="subNav" id="schoolManage">通知公告</li>
+                </div>
+                <ul class="navContent cailiao" style='display:block'>
+                        
+                    <div class="subNav" id="schoolManage">学校管理</div>
+                    <ul class="navContent">
+
+                        <li type="one" childType="first"><a href="javascript:;">办学方向</a></li>
+
+                        <li type="one" childType="second"><a href="javascript:;">办学行为</a></li>
+
+                        <li type="one"  childType="third"><a href="javascript:;">管理队伍</a></li>
+
+                        <li type="one"  childType="fourth"><a href="javascript:;">管理水平</a></li>
+
+                    </ul>
+                    <div class="subNav" id="base">基础条件</div>
+
+                    <ul class="navContent">
+
+                        <li type="two" childType="first"><a href="javascript:;">校园校舍</a></li>
+
+                        <li type="two" childType="second"><a href="javascript:;">设施设备</a></li>
+
+                        <li type="two" childType="third"><a href="javascript:;">师资队伍</a></li>
+
+                        <li type="two" childType="fourth"><a href="javascript:;">信息化建设</a></li>
+                        <li type="two" childType="fifth"><a href="javascript:;">办学环境</a></li>
+
+
+                    </ul>
+
+                    <div class="subNav" id="coorate">校企合作</div>
+
+                    <ul class="navContent">
+
+                        <li type="three" childType="first"><a href="javascript:;">办学模式</a></li>
+
+                        <li type="three" childType="second"><a href="javascript:;">顶岗实习</a></li>
+
+                        <li type="three" childType="third"><a href="javascript:;">专家参与</a></li>
+
+                    </ul>
+
+                    <div class="subNav" id="teach">教育教学</div>
+
+                    <ul class="navContent">
+
+                        <li type="four" childType="first"><a href="javascript:;">德育工作</a></li>
+
+                        <li type="four" childType="second"><a href="javascript:;">专业建设</a></li>
+
+                        <li type="four" childType="third"><a href="javascript:;">模式创新</a></li>
+
+                        <li type="four" childType="fourth"><a href="javascript:;">课程体系</a></li>
+
+                        <li type="four" childType="fifth"><a href="javascript:;">师资队伍建设</a></li>
+
+                    </ul>
+                    <div class="subNav" id="banefit">办学效益</div>
+
+                    <ul class="navContent">
+
+                        <li type="five" childType="first"><a href="javascript:;">招生就业</a></li>
+
+                        <li type="five" childType="second"><a href="javascript:;">教育成果</a></li>
+
+                        <li type="five" childType="third"><a href="javascript:;">服务社会</a></li>
+
+                        <li type="five" childType="fourth"><a href="javascript:;">社会贡献</a></li>
+
+                    </ul>
+
+                </ul>
+            </div> 
+                
         </div>
-        <div>
-            <span>请输入文章标题：</span>
-            <input class="getTitle" type="text"/>
+        <div class="right">
+            <div class="r_inner">
+                <div class="newslist">    
+                    <ul class="contentList">
+                        <li class='title'><b>学校简介</b><button class='addButton'>新增数据</button></li>
+                        <div class="innerList"></div>
+                    </ul>
+                </div> 
+                <div class="editepage" style="display: none">
+                        <span><span class="red">*</span>请选择发表文章类型：<span class="title"></span></span>
+                    <div style="margin-top: 15px;">
+                        <span><span class="red">*</span>请输入文章标题：</span>
+                        <input class="getTitle" type="text"/>
+                    </div>
+                        <div class="editContent"><span class="red">*</span>文章内容：</div>
+                        <div id="editor"></div>
+                        <div class="buttons">
+                            <!--<button id="btn1">销毁编辑器</button>
+                            <button id="btn2">恢复编辑器</button>
+                            <button id="btn3">追加内容</button>-->
+                            <button id="btn4">清空内容</button>
+                            <button id="btn5">保存内容</button>
+                            <button id="btn6">返回</button>
+                        </div>
+                </div>
+                
+            </div>
+                
         </div>
         
-        <div id="editor"></div>
-        <ul class="contentList">
-            
-        </ul>
-    </div>
-    
-    <div class="buttons">
-        <!--<button id="btn1">销毁编辑器</button>
-        <button id="btn2">恢复编辑器</button>
-        <button id="btn3">追加内容</button>-->
-        <button id="btn4">清空内容</button>
-        <button id="btn5">保存内容</button>
-    </div>
     
 </body>
 <script>
@@ -63,7 +149,7 @@
     // 限制上传图片大小为3M 
     //editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
     editor.create();
-    $('.w-e-text-container').attr('height','500px');
+    $('.w-e-text-container').css('height','500px');
     $('#btn1').click(function () {
         // 禁用编辑器
         editor.$textElem.attr('contenteditable', false)
@@ -82,76 +168,6 @@
         // 创建编辑器之后继续追加内容
         editor.txt.html('');
     });
-    $('#btn5').click(function () {
-        // 创建编辑器之后继续追加内容
-        var title = $('.getTitle').val();
-        if(!title){
-            alert('请输入文章标题');
-            return;
-        }
-        if(editor.txt.html()=='<p><br></p>'){
-            alert('请输入文章内容');
-            return;
-        }
-        $.ajax({
-            url:'/addContent',
-            type:'post',
-            data:{data:JSON.stringify({
-                    type:$('#selectType').val(),
-                    title: $('.getTitle').val(),
-                    content:editor.txt.html()
-                })
-            },
-            success:function(res){
-                if(res=='ok'){
-                    alert('保存数据成功');
-                    getdatalist();
-                    $('.getTitle').val('')
-                    editor.txt.html('')
-                }
-            }
-        })
-    });
-    //获取文档数据
-    function getdatalist(){
-        $.ajax({
-            url:'/getContent',
-            type:'get',
-            cache:false,
-            dataType:'json',
-            success:function(res){
-                var contentListOne = '<li class="title"><b>校园快讯</b></li>';
-                res.news&&res.news.map(function(item){
-                    contentListOne += '<li class="title"><span class="leftTitle">'+item.title+"</span><span class='deleteData' type='news'>删除</span></li>"
-                })
-                var contentListTwo = '<li class="title next"><b>通知公告</b></li>';
-                res.notice&&res.notice.map(function(item){
-                    contentListTwo += '<li class="title"><span class="leftTitle">'+item.title+"</span><span class='deleteData' type='notice'>删除</span></li>"
-                })
-                $('.contentList').html(contentListOne+contentListTwo);
-            }
-        })
-    }
-    $('.contentList').on('click','.deleteData',function(){
-        $.ajax({
-            url:'/deleteData',
-            type:'get',
-            dataType:'json',
-            data:{
-                type:$(this).attr('type'),
-                title:$(this).parent().text().replace('删除','')
-            },
-            success:function(res){
-                getdatalist();
-            },
-            error:function(err){
-                getdatalist();
-            }
-
-        })
-    })
-    getdatalist();
-    
     // 初始化编辑器的内容
     editor.txt.html('');
     // 调整编辑器的层级，默认是1000
@@ -159,3 +175,4 @@
    
 </script>
 </html>
+<script src="../js/edite.js"></script>

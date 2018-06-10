@@ -1,0 +1,84 @@
+.middleContent{
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.crumbs{
+    margin-top: 15px;
+    line-height: 50px;
+    /* border: 1px solid #ddd; */
+    padding-left: 35px;
+    border-top: #6DAAEA solid 2px;
+    background-color: #F7FAFD;
+    height: 35px;
+    line-height: 35px;
+    background: #F7FAFD url(../images/home.gif) no-repeat;
+    background-position: 9px 9px;
+}
+.innerHtml{
+    /* padding: 10px; */
+    margin-top: 15px;
+    
+}
+.innerHtml img{
+    width: 100%;
+}
+.middleContent .left{
+    width: 220px;
+    float: left;
+    margin-right: 20px;
+    min-height: 20px;
+    margin-top: 15px;
+}
+.middleContent .left h3{
+    height: 32px;
+    line-height: 32px;
+    background-color: #40BBEA;
+    color: #fff;
+    padding: 2px 18px;
+    font-size: 14px;
+}
+.middleContent .right{
+    float: left;
+    width: 760px;
+}
+.middleContent .left .list{
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+}
+.middleContent .left .list li{
+    height: 33px;
+    line-height: 33px;
+    display: block;
+    padding: 3px 25px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+}
+.middleContent .left .list li:hover{
+    background-color: #94e2ff;;
+    color: white;
+    cursor: pointer;
+}
+.right .innerHtml .datetime{
+    float: right;
+    padding-right: 5px;
+    opacity: 0.7;
+}
+.right .innerHtml .r_list a{
+    color: #333;
+    padding-left: 20px;
+    background: url(../images/icon0.gif) no-repeat 10px 7px;
+}
+.right .innerHtml .r_list li:hover a{
+    /* text-decoration: underline; */
+    color: #40BBEA;
+}
+.right .innerHtml .r_list li{
+    height: 33px;
+    line-height: 33px;
+    font-size: 14px;
+    color: #666;
+    overflow: hidden;
+    border-bottom: 1px dashed #9a9a9a;
+}

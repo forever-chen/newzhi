@@ -7,7 +7,7 @@ const formidable = require('formidable')
 var app = express();
 var multer = require('multer');
 var path = require('path');
-http.createServer((req, res) => {  
+http.createServer(function(req, res){  
     // 发送 HTTP 头部  
       // HTTP 状态值: 200 : OK  
       // 内容类型: text/plain  
@@ -43,47 +43,59 @@ app.use('/getData', function (req, res) {
     var data = require('./app/json/data.json');
     res.send(data.data.shenbao[req.query.type][req.query.data]);
 })
-// 获取文章内容接口
+// 获取文章内容列表接口
 app.use('/getContent', function (req, res) {
-    var dataJson = fs.readFileSync('./app/detailJson/titleJson.json','utf-8');
-    console.log(dataJson)
-    res.send(req.query.type?dataJson[req.query.type]:dataJson)
+    var dataJson = JSON.parse(fs.readFileSync('./app/detailJson/titleJson.json','utf-8'));
+    // console.log(dataJson)
+    res.send(dataJson[req.query.type][req.query.childType])
 })
 // 添加文章
 app.post('/addContent', function (req, res) {
-    // console.log(req.body)
+    var flag = true;
+    // 一个参数是类别，另一个参数子类，还有保存数据
     var reqData = JSON.parse(req.body.data)
+    
     var dataJson = JSON.parse(fs.readFileSync('./app/detailJson/titleJson.json','utf-8'))
-        // console.log( dataJson[reqData.type])
-        if(!dataJson){
-            dataJson={};
+    dataJson[reqData.type][reqData.childType].map(function(item,index){
+        if(item.title == reqData.title){
+            if(reqData.edit){
+                // dataJson[reqData.type][reqData.childType][index].title
+            }else{
+                res.send('文章标题重复，请修改文章标题再次提交');
+                flag = false;
+                return;
+            }
+            
         }
-        if(!dataJson[reqData.type]){
-            dataJson[reqData.type]=[]
+    })
+    if(flag){
+        if(!reqData.edit){
+            dataJson[reqData.type][reqData.childType].push({
+                title:reqData.title,
+                time:formatDate(new Date())
+            })
         }
-        dataJson[reqData.type].unshift({
-            title:reqData.title,
-            time:formatDate(new Date())
-        })
-        console.log()
-        fs.writeFile('./app/detailJson/titleJson.json',JSON.stringify(dataJson))
-        fs.writeFile('./app/detailJson/'+reqData.type+'/'+reqData.title+'.txt',reqData.content)
+        fs.writeFile('./app/detailJson/titleJson.json',JSON.stringify(dataJson));
+        fs.writeFile('./app/detailJson/'+reqData.type+'/'+reqData.title+'.txt',reqData.content);
         res.send('ok');
-    ;
+    }
     
 })
 // 删除文章
 app.use('/deleteData', function (req, res) {
+    // var reqData = JSON.parse(req.query)
+    // console.log(req.query)
     var dataJson = JSON.parse(fs.readFileSync('./app/detailJson/titleJson.json','utf-8'))
-    dataJson[req.query.type].map(function(item,index){
+    dataJson[req.query.type][req.query.childType].map(function(item,index){
         if(item.title==req.query.title){
-            dataJson[req.query.type].splice(index,1);
+            dataJson[req.query.type][req.query.childType].splice(index,1);   
         }
     })
-    fs.writeFileSync('./app/detailJson/titleJson.json',JSON.stringify(dataJson))
-    var exist=fs.existsSync('./app/detailJson/'+req.query.title+'.txt')
+    console.log(req.query.title) 
+    fs.writeFileSync('./app/detailJson/titleJson.json',JSON.stringify(dataJson));
+    var exist=fs.existsSync('./app/detailJson/'+req.query.type+'/'+req.query.title+'.txt')
     if(exist){
-        fs.unlinkSync('./app/detailJson/'+req.query.title+'.txt');
+        fs.unlinkSync('./app/detailJson/'+req.query.type+'/'+req.query.title+'.txt');
         res.send('ok');
     }else{
         res.send('ok');
@@ -91,6 +103,7 @@ app.use('/deleteData', function (req, res) {
 })
 // 文章详情页获取内容
 app.use('/getDetailContent', function (req, res) {
+    console.log(req.query)
     var dirName = './app/detailJson/'+req.query.type+'/'+req.query.title+'.txt'
     console.log(dirName)
     fs.exists(dirName,function(exists){
@@ -101,32 +114,14 @@ app.use('/getDetailContent', function (req, res) {
                 data+=trunk;
             })
             rs.on('end',function(){
-                console.log(data)
-                res.send(JSON.stringify(data));
+                // console.log(data)
+                res.send(data);
             })
         }else{
             res.send('<p>文章内容已经被删除……</p>');
         }
     })
-    
     // var content = fs.readFileSync('./app/detailJson/'+req.query.title+'.txt','utf-8');
-
-})
-app.use('/editor', function (req, res) {
-    res.sendFile(path.resolve(__dirname, 'app/template/editor.html'))
-})
-app.use(bodyParser.json());
-app.use('/index.html', function (req, res) {
-    res.sendFile(path.resolve(__dirname, 'app/template/shenbao.html'))
-})
-app.use('/shenbao1', function (req, res) {
-    res.sendFile(path.resolve(__dirname, 'app/template/shenbao1.html'))
-})
-app.use('/detail/*', function (req, res) {
-    // var params = req._parsedOriginalUrl.path.slice(8)
-    // console.log(params)
-    console.log(11111111111111)
-    res.sendFile(path.resolve(__dirname, 'app/template/detail.html'))
 })
 var util = {
     objForEach: function (obj, fn) {
@@ -175,7 +170,27 @@ app.use('/upload', function (req, res, err) {
         })
     })
 })
+// 路由
+app.use('/editor', function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'app/template/editor.html'))
+})
+app.use('/list',function(req,res){
+    res.sendFile(path.resolve(__dirname, 'app/template/newsList.html'))
 
+})
+app.use(bodyParser.json());
+app.use('/index.html', function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'app/template/shenbao.html'))
+})
+app.use('/shenbao1', function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'app/template/shenbao1.html'))
+})
+app.use('/detail/*', function (req, res) {
+    // var params = req._parsedOriginalUrl.path.slice(8)
+    // console.log(params)
+    console.log(11111111111111)
+    res.sendFile(path.resolve(__dirname, 'app/template/detail.html'))
+})
 
 app.use('/', function (req, res) {
     // console.log(req.url)

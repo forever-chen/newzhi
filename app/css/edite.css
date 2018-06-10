@@ -1,4 +1,5 @@
 @import './index.css';
+@import './shenbao.css';
 .outcontet{
     overflow: hidden;
     margin: 20px;
@@ -44,12 +45,12 @@
     float: left;
 }
 .outcontet .getTitle{
-    width: 400px;
+    width: 500px;
     margin: 0 8px 8px 0;
     list-style: none;
     position: relative;
     display: inline-block;
-    padding: 4px 11px;
+    padding: 0px 11px;
     height: 28px;
     font-size: 14px;
     line-height: 1.5;
@@ -85,20 +86,35 @@
 #selectType option{
     padding: 4px 10px;
 }
+.contentList{
+    color: #333333;
+}
 .contentList .deleteData{
     float: right;
     color: red;
     display: none;
+    /* color: #333; */
+}
+.contentList:hover .leftTitle{
+    color: #1890ff
+}
+.contentList:hover .titleTime{
+    color: #1890ff
 }
 .contentList .leftTitle{
-    width: 70%;
+    width: 60%;
     display: inline-block;
     overflow: hidden;
+    overflow: hidden;
+}
+.contentList .titleTime{
+    width: 20%;
 }
 .contentList .title{
     cursor: pointer;
     padding: 5px 0;
     border-bottom: 1px dashed #1890ff;
+    overflow: hidden;
 }
 .contentList .next{
     margin-top: 20px;
@@ -108,5 +124,72 @@
 }
 .contentList .title:hover .deleteData{
     display: inline;
-    
+}
+.outcontet .leftnav{
+    width: 220px;
+    float: left;
+    /* margin-right: 20px; */
+    min-height: 200px;
+}
+.outcontet .right{
+    float: left;
+    background: #f0f2f5;
+    padding: 15px;
+    width: 70%;
+}
+.outcontet .right .r_inner{
+    background: white;
+    padding: 15px;
+    overflow: hidden;
+    min-height: 400px;
+}
+.outcontet .right .r_inner .contentList{
+    width: 80%;
+}
+.outcontet .right .r_inner .contentList .deleteData{
+    display: inline;
+    margin-right: 30px;
+}
+.subNavBox .currentDd:hover{
+    color: white;
+}
+.simple .subNav{
+    background-image: none;
+    padding-left: 40px;
+}
+.addButton{
+    line-height: 1.5;
+    /* display: inline-block; */
+    font-weight: 400;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    height: 32px;
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    margin-right: 20px;
+    float: right;
+}
+.topnav li{
+    background-image: none;
+    padding-left: 40px;
+}
+.editepage .red{
+    color: red;
+}
+.editepage .editContent{
+    margin-bottom: 15px;
+}
+.w-e-text-container{
+    /* min-height: 300px;
+    max-height: 800px;
+    overflow: scroll; */
 }

@@ -48,11 +48,11 @@ $(function() {
             })
         })
     })
-    if(window.name){
-        $('.subNav').each(function(index,item){
-            if($(this).text()==window.name){
-                $(this).click();
-            }
-        })
-    }
+    // if(window.name){
+    //     $('.subNav').each(function(index,item){
+    //         if($(this).text()==window.name){
+    //             $(this).click();
+    //         }
+    //     })
+    // }
 })
