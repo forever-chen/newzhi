@@ -49,6 +49,12 @@ app.use('/getContent', function (req, res) {
     // console.log(dataJson)
     res.send(dataJson[req.query.type][req.query.childType])
 })
+// 获取文章内容列表接口
+app.use('/getAllContent', function (req, res) {
+    var dataJson = JSON.parse(fs.readFileSync('./app/detailJson/titleJson.json','utf-8'));
+    // console.log(dataJson)
+    res.send(dataJson)
+})
 // 添加文章
 app.post('/addContent', function (req, res) {
     var flag = true;
