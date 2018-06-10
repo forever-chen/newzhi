@@ -7,14 +7,14 @@ const formidable = require('formidable')
 var app = express();
 var multer = require('multer');
 var path = require('path');
-http.createServer(function(req, res){  
-    // 发送 HTTP 头部  
-      // HTTP 状态值: 200 : OK  
-      // 内容类型: text/plain  
-      res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});  
-      // 发送响应数据 "Hello World"  
+// http.createServer(function(req, res){  
+//     // 发送 HTTP 头部  
+//       // HTTP 状态值: 200 : OK  
+//       // 内容类型: text/plain  
+//       res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});  
+//       // 发送响应数据 "Hello World"  
         
-  }).listen(8080);  
+//   }).listen(8080);  
 // app.use(express.static(path.resolve(__dirname, 'upload-files')));
 // app.use(express.limit(100000000));
 app.use(express.static(path.resolve(__dirname, 'app')))
