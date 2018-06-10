@@ -82,3 +82,10 @@
     overflow: hidden;
     border-bottom: 1px dashed #9a9a9a;
 }
+.shenbaoTitle{
+    width: 100%;
+    margin-top: 20px;
+}
+.shenbaoTitle img{
+    width: 100%;
+}
