@@ -95,11 +95,11 @@
     display: none;
     /* color: #333; */
 }
-.contentList:hover .leftTitle{
-    color: #1890ff
+.contentList .innerList .title:hover .leftTitle{
+    color: #1890ff;
 }
-.contentList:hover .titleTime{
-    color: #1890ff
+.contentList .innerList .title:hover .titleTime{
+    color: #1890ff;
 }
 .contentList .leftTitle{
     width: 60%;
