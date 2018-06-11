@@ -334,29 +334,9 @@ $('.category').on('click','span',function () {
 })
 
 // 首页标签跳转申报页面
-$('.shenbaoline').on('click','.list li',function () {
-        // console.log($(this).parent('.list').prev().find('b').text())
-        window.name = $(this).parent().prev().find('b').text();
-        window.location.href = '/index.html';
+// $('.shenbaoline').on('click','.list li',function () {
+//         // console.log($(this).parent('.list').prev().find('b').text())
+//         window.name = $(this).parent().prev().find('b').text();
+//         window.location.href = '/index.html';
         
-})
-function getdatalist() {
-        $.ajax({
-                url: '/getContent',
-                type: 'get',
-                dataType:'json',
-                success: function (res) {
-                        var contentListOne = '';
-                        res.news&&res.news.length>0&&res.news.slice(0,5).map(function (item) {
-                                contentListOne += "<li><span class='left'><a href='/detail/" + item.title + "?type=news'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
-                        })
-                        $('.apiLine .news .list').html(contentListOne);
-                        var contentListTwo = '';
-                        res.notice&&res.notice.length>0&&res.notice.slice(0,5).map(function (item) {
-                                contentListTwo += "<li><span class='left'><a href='/detail/" + item.title + "?type=notice'>" + item.title + "</a></span><span class='date'>" + item.time + "</span></li>"
-                        })
-                        $('.apiLine .notice .list').html(contentListTwo);
-                }
-        })
-}
-getdatalist()
+// })
