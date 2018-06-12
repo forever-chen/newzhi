@@ -157,7 +157,7 @@ a:hover {
 }
 
 .navcontent a .down {
-    top: -230px;
+    top: -260px;
     position: absolute;
     width: 100%;
     text-align: center;
@@ -269,7 +269,7 @@ a:hover {
     background-color: #0873C0;
 }
 
-#banner_list a {
+#banner_list li {
     position: absolute;
     width: 100%;
 }

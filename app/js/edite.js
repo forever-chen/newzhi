@@ -75,7 +75,7 @@ $('.contentList').on('click','.leftTitle',function(){
             editor.txt.html(res);
         },
         error:function(err){
-            console.log(err)
+            // console.log(err)
             
         }
     })   

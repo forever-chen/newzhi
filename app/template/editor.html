@@ -12,7 +12,8 @@
 <link rel="stylesheet" type="text/css" href="../wangEditor/release/wangEditor.min.css">
 <link rel="stylesheet" href="../css/edite.css">
 <body>
-    <div class="outcontet">
+    <div class="outcontet .divaaa">
+            @Html.Raw(ViewBag.Model.NewsContent)
         <div class="topmenu">
             <b>后台管理系统</b>
         </div>
@@ -24,7 +25,16 @@
                     <li type="newslist" childType="notice" class="subNav" id="schoolManage">通知公告</li>
                 </div>
                 <ul class="navContent cailiao" style='display:block'>
-                        
+                    <div class="subNav" id="schoolManage">学校概况</div>
+                    <ul class="navContent">
+                        <li type="zero" childType="first"><a href="javascript:;">学校简介</a></li> 
+                        <li type="zero" childType="second"><a href="javascript:;">领导班子</a></li>
+                        <li type="zero"  childType="third"><a href="javascript:;">机构建设</a></li>
+                        <li type="zero"  childType="fourth"><a href="javascript:;">学校荣誉</a></li>
+                        <li type="zero"  childType="fifth"><a href="javascript:;">校园风貌</a></li>
+                        <li type="zero"  childType="sixth"><a href="javascript:;">专业建设</a></li>
+
+                    </ul>    
                     <div class="subNav" id="schoolManage">学校管理</div>
                     <ul class="navContent">
 
@@ -122,6 +132,7 @@
                             <button id="btn5">保存内容</button>
                             <button id="btn6">返回</button>
                         </div>
+                        
                 </div>
                 
             </div>
@@ -179,3 +190,56 @@
 </script>
 </html>
 <script src="../js/edite.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+    UnLoadImg($(".divaaa"));
+    }
+    function UnLoadImg(obj) {
+        $obj = $(obj);
+        var $img = $obj.find("img")
+    
+    
+        $img.each(function () {
+            if ($(this).parents("a").length == 0) {
+                $(this).css({ "cursor": "pointer" });
+                $(this).click(function () {
+                    window.open($(this).attr("src"));
+                });
+            }
+        });
+    
+    
+        var maxWidth = $obj.width();
+        for (var i = 0; i < $img.length; i++) {
+            if ($img.eq(i).width() > maxWidth) {
+                $img.eq(i).css({ width: maxWidth + "px", height: AutoResizeImage(maxWidth, 0, $img.eq(i)) + "px" });
+            }
+        }
+    }
+    
+    
+    function AutoResizeImage_H(maxWidth, maxHeight, objImg) {
+        var img = objImg;
+        var hRatio;
+        var wRatio;
+        var Ratio = 1;
+        var w = img.width();
+        var h = img.height();
+        wRatio = maxWidth / w;
+        hRatio = maxHeight / h;
+        if (maxWidth == 0 && maxHeight == 0) {
+            Ratio = 1;
+        } else if (maxWidth == 0) {
+            if (hRatio < 1) Ratio = hRatio;
+        } else if (maxHeight == 0) {
+            if (wRatio < 1) Ratio = wRatio;
+        } else if (wRatio < 1 || hRatio < 1) {
+            Ratio = (wRatio <= hRatio ? wRatio : hRatio);
+        }
+        if (Ratio < 1) {
+            w = w * Ratio;
+            h = h * Ratio;
+        }
+        return h;
+    }
+</script>

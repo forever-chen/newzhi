@@ -48,7 +48,7 @@
 
 .navContent {
     display: none;
-    border-bottom: solid 1px #e5e3da;
+    border-bottom: 0;
 }
 
 .subNavBox .navContent li a {
