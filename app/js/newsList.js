@@ -17,7 +17,11 @@ if(names){
             $('.middleContent .left .list').html(str);
         }
     })
-    $('.right .crumbs').append($("<span> / "+names.title+"</span>"))
+    if(names.name){
+        $('.right .crumbs').append($("<span> / "+names.title+"</span>"+"<span class='curList'> / "+names.name+"</span>"))
+    }else{
+        $('.right .crumbs').append($("<span> / "+names.title+"</span>"))
+    }
     $('.middleContent .left .list').on('click','li',function(){
         $('.right .crumbs span').remove('.curList');
         $('.right .crumbs').append($("<span class='curList'> / "+$(this).text()+"</span>"));

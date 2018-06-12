@@ -144,3 +144,15 @@ $('#btn5').click(function () {
         }
     })
 })
+
+// // 图片自由缩放
+// $('img').click(function(){
+//     aler(1)
+//     var click = $(this).prev()
+//     // console.log($(this).width())
+//     $(this).css({width:'100%',height:'100%'});
+//     $("<div class='out_btn'><div class='fuceng'></div><button onclick='blowup()' class='btn_up'>放大</button><button class='btn_down' onclick='reduce()'>缩小</button></div>").css({width:$(this).width(),height:$(this).height()}).append($(this)).insertAfter(click)
+// })
+// function blowup(){
+//     $(this).parent().css({width:$(this).parent().width()+20,height:$(this).parent().height()+20})
+// }

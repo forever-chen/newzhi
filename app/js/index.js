@@ -311,7 +311,7 @@ $('.category').on('click','.down li',function () {
         //         childType:$(this).attr('childType'),
         //         title:$(this).parent().prev().text()
         // }
-        window.name = "type="+$(this).attr('type')+"&childType="+$(this).attr('childType')+"&title="+$(this).parent().prev().text();
+        window.name = "type="+$(this).attr('type')+"&childType="+$(this).attr('childType')+"&title="+$(this).parent().prev().text()+"&name="+$(this).text();
         window.location.href = '/list';
         
 }) 
