@@ -3,6 +3,15 @@
 .outcontet{
     overflow: hidden;
     margin: 20px;
+    background: #f0f2f5;
+    
+}
+.outcontet .subNavBox{
+    background: white;
+    border-radius: 5px;
+    border-bottom: 0;
+    min-height: 360px;
+    overflow: hidden;
 }
 #editor{
     width: 80%;
@@ -125,9 +134,22 @@
 .contentList .title:hover .deleteData{
     display: inline;
 }
+.outcontet .topmenu{
+    background: #000;
+    margin: 15px;
+    padding: 20px;
+    font-size: 24px;
+    border-radius: 5px;
+    width: 1210px;
+    /* color: white; */
+}
+.outcontet .topmenu b{
+    color: white;
+}
 .outcontet .leftnav{
     width: 220px;
     float: left;
+    padding: 15px;
     /* margin-right: 20px; */
     min-height: 200px;
 }
@@ -135,7 +157,7 @@
     float: left;
     background: #f0f2f5;
     padding: 15px;
-    width: 70%;
+    width: 1000px;
 }
 .outcontet .right .r_inner{
     background: white;

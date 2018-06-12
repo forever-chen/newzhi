@@ -2,7 +2,9 @@
     width: 200px;
     min-height: 365px;
     border: solid 1px #e5e3da;
-    float: left
+    float: left;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .subNav {
@@ -95,6 +97,7 @@
 }
 
 .navbox .right {
+    border-radius: 5px;
     float: right;
     width: 797px;
     background: #F6F4E7;
