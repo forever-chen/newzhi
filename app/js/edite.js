@@ -146,8 +146,8 @@ $('#btn5').click(function () {
 })
 
 // // 图片自由缩放
-// $('img').click(function(){
-//     aler(1)
+// $('#text-elem8106753412938723 img').click(function(){
+//     alert(1)
 //     var click = $(this).prev()
 //     // console.log($(this).width())
 //     $(this).css({width:'100%',height:'100%'});
