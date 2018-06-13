@@ -1,3 +1,42 @@
+var editor = new wangEditor('#editor');
+    editor.customConfig.onchange = function (html) {
+
+    }
+
+    editor.customConfig.uploadImgServer = '/upload'
+
+    editor.customConfig.pasteFilterStyle = false
+    editor.customConfig.pasteTextHandle = function (content) {
+
+        return content + ''
+    }
+
+    editor.create();
+    $('.w-e-text-container').css('height','500px');
+    $('#btn1').click(function () {
+
+        editor.$textElem.attr('contenteditable', false)
+    });
+
+    $('#btn2').click(function () {
+
+        editor.$textElem.attr('contenteditable', true)
+        
+    });
+    $('#btn3').click(function () {
+
+        editor.txt.append('<p>追加的内容</p>')
+    });
+    $('#btn4').click(function () {
+
+        editor.txt.html('');
+    });
+
+    editor.txt.html('');
+
+    editor.customConfig.zIndex = 100
+
+
 $(".subNav").click(function() {
     if ($(this).attr("id")) {
         initType = $(this).attr("id");
@@ -6,16 +45,16 @@ $(".subNav").click(function() {
     $(this).addClass('currentDd currentDt').next(".navContent").slideToggle(300).siblings(".navContent").slideUp(500);
     
 })
-// 新闻列表信息
+
 var selectData = {
     type:"intro",
     childType:"simple"
 }
-// 新闻标题
+
 var newslist = '学校简介';
 var edit = false;
 getdatalist(selectData);
-//获取文档数据
+
 function getdatalist(data){
     $.ajax({
         url:'/getContent',
@@ -37,7 +76,7 @@ function getdatalist(data){
         }
     })
 }
-// 删除新闻
+
 $('.contentList').on('click','.deleteData',function(){
     $.ajax({
         url:'/deleteData',
@@ -56,7 +95,7 @@ $('.contentList').on('click','.deleteData',function(){
         }
     })
 })
-// 点击新闻跳转编辑页面
+
 $('.contentList').on('click','.leftTitle',function(){
     $('.newslist').css({display:'none'});
     $('.editepage').css({display:'block'});
@@ -68,19 +107,19 @@ $('.contentList').on('click','.leftTitle',function(){
     $.ajax({
         url:'/getDetailContent',
         type:'get',
-        // dataType:'json',
+
         data:list,
         success:function(res){
            $('.getTitle').val(title).attr({disabled:true});
             editor.txt.html(res);
         },
         error:function(err){
-            // console.log(err)
+ 
             
         }
     })   
 })
-// 点击左侧菜单跳转新闻列表页面
+
 $('.subNavBox .navContent li').click(function(){
     selectData = {
         type:$(this).attr('type'),
@@ -93,12 +132,12 @@ $('.subNavBox .navContent li').click(function(){
     $('.editepage').css({display:'none'});
 
 })
-// 返回按钮
+
 $('#btn6').click(function () {
     $('.newslist').css({display:'block'});
     $('.editepage').css({display:'none'});
 });
-// 新增按钮
+
 $('.addButton').on('click',function(){
     $('.newslist').css({display:'none'});
     $('.editepage').css({display:'block'});
@@ -107,9 +146,9 @@ $('.addButton').on('click',function(){
     $('.getTitle').val('').attr({disabled:false});
     editor.txt.html('');
 })
-// 保存数据
+
 $('#btn5').click(function () {
-    // 创建编辑器之后继续追加内容
+
     var title = $('.getTitle').val();
     if(!title){
         alert('请输入文章标题');
@@ -144,15 +183,3 @@ $('#btn5').click(function () {
         }
     })
 })
-
-// // 图片自由缩放
-// $('#text-elem8106753412938723 img').click(function(){
-//     alert(1)
-//     var click = $(this).prev()
-//     // console.log($(this).width())
-//     $(this).css({width:'100%',height:'100%'});
-//     $("<div class='out_btn'><div class='fuceng'></div><button onclick='blowup()' class='btn_up'>放大</button><button class='btn_down' onclick='reduce()'>缩小</button></div>").css({width:$(this).width(),height:$(this).height()}).append($(this)).insertAfter(click)
-// })
-// function blowup(){
-//     $(this).parent().css({width:$(this).parent().width()+20,height:$(this).parent().height()+20})
-// }

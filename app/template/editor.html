@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>文章内容编辑</title>
+    <title>中阳县职教中心</title>
+    <link rel="icon" href="../images/xiaohui.png">
+    <link rel="stylesheet" type="text/css" href="../wangEditor/release/wangEditor.min.css">
+    <link rel="stylesheet" href="../css/edite.css">
 </head>
-<script type="text/javascript" src="../wangEditor/release/wangEditor.min.js"></script>
-<!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script> -->
-<script src="../js/jquery.js"></script>
-<link rel="stylesheet" type="text/css" href="../wangEditor/release/wangEditor.min.css">
-<link rel="stylesheet" href="../css/edite.css">
+
+
 <body>
     <div class="outcontet">
         <div class="topmenu">
@@ -135,9 +135,7 @@
                         <div class="editContent"><span class="red">*</span>文章内容：</div>
                         <div id="editor"></div>
                         <div class="buttons">
-                            <!--<button id="btn1">销毁编辑器</button>
-                            <button id="btn2">恢复编辑器</button>
-                            <button id="btn3">追加内容</button>-->
+                     
                             <button id="btn4">清空内容</button>
                             <button id="btn5">保存内容</button>
                             <button id="btn6">返回</button>
@@ -148,56 +146,11 @@
             </div>
                 
         </div>
-        
-    
+    </div>
 </body>
-<script>
-    var editor = new wangEditor('#editor');
-    editor.customConfig.onchange = function (html) {
-        // 监控变化
-    }
-    //上传图片
-    editor.customConfig.uploadImgServer = '/upload'
-    // 设置 headers（举例）
-    
-    // 关闭粘贴样式的过滤
-    editor.customConfig.pasteFilterStyle = false
-    editor.customConfig.pasteTextHandle = function (content) {
-        // content 即粘贴过来的内容（html 或 纯文本），可进行自定义处理然后返回
-        return content + ''
-    }
-    // 上传图片接口
-    // editor.customConfig.uploadImgServer = '/upload'
-    // 使用 base64 保存图片
-    //editor.customConfig.uploadImgShowBase64 = true  
-    // 限制上传图片大小为3M 
-    //editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
-    editor.create();
-    $('.w-e-text-container').css('height','500px');
-    $('#btn1').click(function () {
-        // 禁用编辑器
-        editor.$textElem.attr('contenteditable', false)
-    });
-
-    $('#btn2').click(function () {
-        // 开启编辑器
-        editor.$textElem.attr('contenteditable', true)
-        
-    });
-    $('#btn3').click(function () {
-        // 创建编辑器之后继续追加内容
-        editor.txt.append('<p>追加的内容</p>')
-    });
-    $('#btn4').click(function () {
-        // 创建编辑器之后继续追加内容
-        editor.txt.html('');
-    });
-    // 初始化编辑器的内容
-    editor.txt.html('');
-    // 调整编辑器的层级，默认是1000
-    editor.customConfig.zIndex = 100
-   
-</script>
 </html>
-<script src="../js/edite.js"></script>
+<script type="text/javascript" src="../wangEditor/release/wangEditor.min.js"></script>
 
+<script src="../js/jquery.js"></script>
+
+<script src="../js/edite.js"></script>

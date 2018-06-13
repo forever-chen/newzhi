@@ -242,3 +242,6 @@
     opacity: 0.3;
     z-index: 1;
 }
+#editor .w-e-toolbar .w-e-menu{
+    display: inline-block;
+}

@@ -1,1 +1,1 @@
-<p>通知公告&nbsp;&nbsp;<img src="../upload-files/sdfsd123.jpg" style="max-width: 100%;"><br></p>
+<p>通知公告&nbsp;&nbsp;<img style="max-width: 100%;" src="../upload-files/sdfsd123.jpg"><br></p>

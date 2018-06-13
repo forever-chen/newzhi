@@ -81,8 +81,8 @@ app.post('/addContent', function (req, res) {
                 time:formatDate(new Date())
             })
         }
-        fs.writeFile('./app/detailJson/titleJson.json',JSON.stringify(dataJson));
-        fs.writeFile('./app/detailJson/'+reqData.type+'/'+reqData.title+'.txt',reqData.content);
+        fs.writeFileSync('./app/detailJson/titleJson.json',JSON.stringify(dataJson));
+        fs.writeFileSync('./app/detailJson/'+reqData.type+'/'+reqData.title+'.txt',reqData.content);
         res.send('ok');
     }
     
