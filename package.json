@@ -7,10 +7,14 @@
         "start": "node server.js"
     },
     "dependencies": {
+        "archiver": "^2.1.1",
         "body-parser": "^1.18.2",
+        "compressing": "^1.2.3",
         "express": "^4.16.2",
         "formidable": "^1.2.1",
-        "multer": "^1.3.0"
+        "fstream": "^1.0.11",
+        "multer": "^1.3.0",
+        "tar": "^4.4.4"
     },
     "devDependencies": {
         "body-parser": "^1.18.2",

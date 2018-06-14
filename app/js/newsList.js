@@ -37,6 +37,7 @@ if(names){
             url:'/getContent',
             data:data,
             type:'get',
+            cache:false,
             success:function(res){
                 var str="";
                 res.length>0&&res.map(function(item){

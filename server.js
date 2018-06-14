@@ -3,10 +3,13 @@ var http = require('http');
 var port = 18080;
 var fs = require('fs')
 var express = require('express');
-const formidable = require('formidable')
+var formidable = require('formidable')
 var app = express();
 var multer = require('multer');
 var path = require('path');
+var fstream = require('fstream');
+var tar = require('tar');
+var zlib = require('zlib');
 // http.createServer(function(req, res){  
 //     // 发送 HTTP 头部  
 //       // HTTP 状态值: 200 : OK  
@@ -18,6 +21,8 @@ var path = require('path');
 // app.use(express.static(path.resolve(__dirname, 'upload-files')));
 // app.use(express.limit(100000000));
 app.use(express.static(path.resolve(__dirname, 'app')))
+// app.use(express.static(path.resolve(__dirname, 'app')))
+
 const bodyParser = require('body-parser');
 // parse application/x-www-form-urlencoded
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,10 +30,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.json({limit: '500mb'}));
 app.use(bodyParser.urlencoded({limit: '500mb', extended: true}));
-// 获取内容接口
-// app.use(function(req,res){
-//     res.setHeader("Content-Type","text/html;charset=utf-8")
-// })
+
 var formatDate = function (date) {  
     var y = date.getFullYear();  
     var m = date.getMonth() + 1;  
@@ -42,18 +44,21 @@ var formatDate = function (date) {
 app.use('/getData', function (req, res) {
     var data = require('./app/json/data.json');
     res.send(data.data.shenbao[req.query.type][req.query.data]);
+    return;
 })
 // 获取文章内容列表接口
 app.use('/getContent', function (req, res) {
     var dataJson = JSON.parse(fs.readFileSync('./app/detailJson/titleJson.json','utf-8'));
     // console.log(dataJson)
     res.send(dataJson[req.query.type][req.query.childType])
+    return;
 })
 // 获取文章内容列表接口
 app.use('/getAllContent', function (req, res) {
     var dataJson = JSON.parse(fs.readFileSync('./app/detailJson/titleJson.json','utf-8'));
     // console.log(dataJson)
     res.send(dataJson)
+    return;
 })
 // 添加文章
 app.post('/addContent', function (req, res) {
@@ -85,6 +90,7 @@ app.post('/addContent', function (req, res) {
         fs.writeFileSync('./app/detailJson/'+reqData.type+'/'+reqData.title+'.txt',reqData.content);
         res.send('ok');
     }
+    return;
     
 })
 // 删除文章
@@ -106,12 +112,13 @@ app.use('/deleteData', function (req, res) {
     }else{
         res.send('ok');
     }
+    return;
 })
 // 文章详情页获取内容
 app.use('/getDetailContent', function (req, res) {
-    console.log(req.query)
-    var dirName = './app/detailJson/'+req.query.type+'/'+req.query.title+'.txt'
-    console.log(dirName)
+    // console.log(req.query)
+    var dirName = './app/detailJson/'+req.query.type+'/'+req.query.title+'.txt';
+    // console.log(dirName)
     fs.exists(dirName,function(exists){
         if(exists){
             var rs=fs.createReadStream(dirName,'utf-8');
@@ -127,7 +134,126 @@ app.use('/getDetailContent', function (req, res) {
             res.send('<p>文章内容已经被删除……</p>');
         }
     })
+    return;
     // var content = fs.readFileSync('./app/detailJson/'+req.query.title+'.txt','utf-8');
+})
+
+
+
+
+
+
+// app.use('/downLoadFile', function (req, res) {
+//     const compressing = require('compressing');
+//     compressing.tar.compressDir('./app/detailJson', './yasuo.tar');
+//     // compressing.tgz.uncompress('./yasuo.tar', 'path/to/destination/dir')
+// })
+
+
+var fileList = [];
+var fileName = [];
+var prev = '';
+function fileDisplay(filePath){
+    //根据文件路径读取文件，返回文件列表
+    fs.readdir(filePath,function(err,files){
+        if(err){
+            console.warn(err)
+        }else{
+            // console.log(files)
+            //遍历读取到的文件列表
+            files.forEach(function(filename){
+                // console.log(filename)
+                //获取当前文件的绝对路径
+                var filedir = path.join(filePath,filename);
+                //根据文件路径获取文件信息，返回一个fs.Stats对象
+                fs.stat(filedir,function(eror,stats){
+                    if(eror){
+                        console.warn('获取文件stats失败');
+                    }else{
+                        // console.log(stats)
+                        var isFile = stats.isFile();//是文件
+                        var isDir = stats.isDirectory();//是文件夹
+                        if(isFile){
+                            fileList.push(filedir);
+                            console.log(filePath)
+                            if(filePath.indexOf('detailJson')!=='-1'){
+                                prev =  filePath.split('\\')[filePath.split('\\').length-1];
+                            }else{
+                                prev =  'img';
+                            }
+                            fileName.push(prev+'-'+filename);
+                        }
+                        if(isDir){
+                            fileDisplay(filedir);//递归，如果是文件夹，就继续遍历该文件夹下面的文件
+                            // console.log('hahhahahah')
+                            // prev = filename;
+                        }
+                    }
+                })
+            });
+        }
+    });
+    setTimeout(function(){
+        compressFile()
+        console.log(fileList,fileName)
+    },10000)
+}
+
+function compressFile(){
+    var ARCHIVER = require('archiver');
+    // var FS = require('fs');
+    var presentDate = new Date();
+    var myDate = presentDate.toLocaleDateString();//获取当前日期，eg:2017-02-08，以此日期为压缩包文件名
+    var files = fileList;//将图片路径组合成数组形式，用for循环遍历
+    //压缩后文件输出地址：/ARCHIVER/appData/files/，压缩包名：eg：2017-02-08.zip
+    var output = fs.createWriteStream('./yasuo' + '.zip');
+    //archiver可压缩为zip或tar格式，这里选择zip格式，注意这里新定义了一个变量archive，而不是原有的archiver包引用
+    var archive = ARCHIVER('zip', {
+        store: true
+    });
+    //将压缩路径、包名与压缩格式连接
+    archive.pipe(output);
+    //nameInZIP指压缩包内的文件名
+    var nameInZIP = fileName;
+    for (var i = 0; i < files.length; i++) {
+        // console.log(files[i]);
+        //FS读取文件流并命名，将读取的文件流append到压缩包中
+        archive.append(fs.createReadStream(files[i]), {'name': nameInZIP[i]});
+    }
+    //压缩结束
+    archive.finalize();
+}
+
+
+app.use('/compress', function (req, res) {
+    fileDisplay('./app/detailJson')
+    fileDisplay('./app/upload-files')
+})
+
+
+
+
+
+// 文章内容下载
+app.use('/downLoadFile', function (req, res) {
+    // fstream.Reader({path:'./app/detailJson',type:'Directory'})
+    // .pipe(tar.Pack({ noRepository: true, fromBase: true }))
+    // .pipe(zlib.Gzip()).pipe(res)
+    
+    // var dirName = './app/detailJson/'+req.query.type+'/'+req.query.title+'.txt'
+    var filePath = path.join(__dirname, './yasuo.zip');  
+    var stats = fs.statSync(filePath);  
+    var isFile = stats.isFile();  
+    if(isFile){  
+        res.set({  
+            'Content-Type': 'application/octet-stream',  
+            'Content-Disposition': 'attachment; filename=yasuo.zip'
+            // 'Content-Length': stats.size  
+        });  
+        fs.createReadStream(filePath,{encoding:'utf-8'}).pipe(res);  
+    } else {  
+        res.end(404);  
+    }  
 })
 var util = {
     objForEach: function (obj, fn) {
@@ -199,7 +325,7 @@ app.use('/detail/*', function (req, res) {
 })
 
 app.use('/', function (req, res) {
-    // console.log(req.url)
+    console.log(req.url)
     res.sendFile(path.resolve(__dirname, 'app/template/first.html'))
 })
 

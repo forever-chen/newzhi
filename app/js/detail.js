@@ -6,10 +6,11 @@ window.name.split('&').map(function(item){
 $.ajax({
     url:'/getDetailContent',
     type:'get',
+    cache:false,
     // dataType:'json',
     data:{title:params,type:names.type,childType:names.childType},
     success:function(res){
         $('.crumbs span').text(' / '+params);
-        $('.innerHtml').html(res);
+        $('.middleContent .w-e-text').html(res);
     }
 })

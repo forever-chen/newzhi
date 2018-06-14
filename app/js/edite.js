@@ -47,8 +47,8 @@ $(".subNav").click(function() {
 })
 
 var selectData = {
-    type:"intro",
-    childType:"simple"
+    type:"newslist",
+    childType:"news"
 }
 
 var newslist = '学校简介';
@@ -59,6 +59,7 @@ function getdatalist(data){
     $.ajax({
         url:'/getContent',
         type:'get',
+        cache:false,
         data:data,
         cache:false,
         dataType:'json',
@@ -81,6 +82,7 @@ $('.contentList').on('click','.deleteData',function(){
     $.ajax({
         url:'/deleteData',
         type:'get',
+        cache:false,
         // dataType:'json',
         data:{
             type:$(this).attr('type'),
@@ -107,9 +109,10 @@ $('.contentList').on('click','.leftTitle',function(){
     $.ajax({
         url:'/getDetailContent',
         type:'get',
-
+        cache:false,
         data:list,
         success:function(res){
+            // debugger;
            $('.getTitle').val(title).attr({disabled:true});
             editor.txt.html(res);
         },
@@ -148,23 +151,24 @@ $('.addButton').on('click',function(){
 })
 
 $('#btn5').click(function () {
-
-    var title = $('.getTitle').val();
+    var title = $('.getTitle').val().trim();
     if(!title){
         alert('请输入文章标题');
         return;
     }
-    if(editor.txt.html()=='<p><br></p>'){
+    // console.log(editor.txt.html())
+    if(editor.txt.html()=='<p><br></p>'||editor.txt.html()=="<p>&nbsp;</p>"){
         alert('请输入文章内容');
         return;
     }
     $.ajax({
         url:'/addContent',
         type:'post',
+        cache:false,
         data:{data:JSON.stringify({
                 type:selectData.type,
                 childType:selectData.childType,
-                title: $('.getTitle').val(),
+                title: title,
                 content:editor.txt.html(),
                 edit:edit
             })

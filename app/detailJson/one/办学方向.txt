@@ -1,1 +1,1 @@
-<p>办学方向办学方向办学方向办学方向</p>
+<p><span class="title">办学方向</span> <span class="title">办学方向</span> <br></p>

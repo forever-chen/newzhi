@@ -826,7 +826,7 @@ Bold.prototype = {
         if (isSeleEmpty) {
             // 需要将选取折叠起来
             editor.selection.collapseRange();
-            editor.selection.restoreSelection();
+            // editor.selection.restoreSelection();
         }
     },
 
@@ -1360,7 +1360,7 @@ Link.prototype = {
             }
             // 将该元素都包含在选取之内，以便后面整体替换
             editor.selection.createRangeByElem($linkelem);
-            editor.selection.restoreSelection();
+            // editor.selection.restoreSelection();
             // 显示 panel
             this._createPanel($linkelem.text(), $linkelem.attr('href'));
         } else {
@@ -1521,7 +1521,7 @@ Italic.prototype = {
         if (isSeleEmpty) {
             // 需要将选取折叠起来
             editor.selection.collapseRange();
-            editor.selection.restoreSelection();
+            // editor.selection.restoreSelection();
         }
     },
 
@@ -1602,7 +1602,7 @@ StrikeThrough.prototype = {
         if (isSeleEmpty) {
             // 需要将选取折叠起来
             editor.selection.collapseRange();
-            editor.selection.restoreSelection();
+            // editor.selection.restoreSelection();
         }
     },
 
@@ -1655,7 +1655,7 @@ Underline.prototype = {
         if (isSeleEmpty) {
             // 需要将选取折叠起来
             editor.selection.collapseRange();
-            editor.selection.restoreSelection();
+            // editor.selection.restoreSelection();
         }
     },
 
@@ -1736,7 +1736,7 @@ List.prototype = {
     _command: function _command(value) {
         var editor = this.editor;
         var $textElem = editor.$textElem;
-        editor.selection.restoreSelection();
+        // editor.selection.restoreSelection();
         if (editor.cmd.queryCommandState(value)) {
             return;
         }
@@ -1999,7 +1999,7 @@ Code.prototype = {
 
         if (!$startElem.equal($endElem)) {
             // 跨元素选择，不做处理
-            editor.selection.restoreSelection();
+            // editor.selection.restoreSelection();
             return;
         }
         if (!isSeleEmpty) {
@@ -2007,7 +2007,7 @@ Code.prototype = {
             $code = $('<code>' + selectionText + '</code>');
             editor.cmd.do('insertElem', $code);
             editor.selection.createRangeByElem($code, false);
-            editor.selection.restoreSelection();
+            // editor.selection.restoreSelection();
             return;
         }
 
@@ -2085,7 +2085,7 @@ Code.prototype = {
             return;
         }
         $selectionELem.html(value);
-        editor.selection.restoreSelection();
+        // editor.selection.restoreSelection();
     },
 
     // 试图改变 active 状态
@@ -3281,7 +3281,7 @@ Text.prototype = {
             var $p = $('<p><br></p>');
             $p.insertBefore($selectionElem);
             editor.selection.createRangeByElem($p, true);
-            editor.selection.restoreSelection();
+            // editor.selection.restoreSelection();
             $selectionElem.remove();
         }
 
@@ -3353,7 +3353,7 @@ Text.prototype = {
                 var $p = $('<p><br></p>');
                 $p.insertAfter($parentElem);
                 editor.selection.createRangeByElem($p, true);
-                editor.selection.restoreSelection();
+                // editor.selection.restoreSelection();
 
                 // 修改状态
                 editor._willBreakCode = false;
@@ -3426,7 +3426,7 @@ Text.prototype = {
                 $textElem.html(''); // 一定要先清空，否则在 firefox 下有问题
                 $textElem.append($p);
                 editor.selection.createRangeByElem($p, false, true);
-                editor.selection.restoreSelection();
+                // editor.selection.restoreSelection();
             }
         });
     },
@@ -3611,7 +3611,7 @@ Text.prototype = {
 
             // 修改选区并 restore ，防止用户此时点击退格键，会删除其他内容
             editor.selection.createRangeByElem($img);
-            editor.selection.restoreSelection();
+            // editor.selection.restoreSelection();
         });
 
         // 去掉图片的 selected 样式
@@ -3680,7 +3680,7 @@ Command.prototype = {
         }
 
         // 恢复选取
-        editor.selection.restoreSelection();
+        // editor.selection.restoreSelection();
 
         // 执行
         var _name = '_' + name;
@@ -3697,7 +3697,7 @@ Command.prototype = {
 
         // 最后，恢复选取保证光标在原来的位置闪烁
         editor.selection.saveRange();
-        editor.selection.restoreSelection();
+        // editor.selection.restoreSelection();
 
         // 触发 onchange
         editor.change && editor.change();
@@ -3867,12 +3867,12 @@ API.prototype = {
         return false;
     },
 
-    // 恢复选区
-    restoreSelection: function restoreSelection() {
-        var selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(this._currentRange);
-    },
+    // // 恢复选区
+    // restoreSelection: function restoreSelection() {
+    //     var selection = window.getSelection();
+    //     selection.removeAllRanges();
+    //     selection.addRange(this._currentRange);
+    // },
 
     // 创建一个空白（即 &#8203 字符）选区
     createEmptyRange: function createEmptyRange() {
@@ -4547,7 +4547,7 @@ Editor.prototype = {
         }
 
         this.selection.createRangeByElem($last, false, true);
-        this.selection.restoreSelection();
+        // this.selection.restoreSelection();
     },
 
     // 绑定事件

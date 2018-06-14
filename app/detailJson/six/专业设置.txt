@@ -1,1 +1,1 @@
-<p>专业设置&nbsp;&nbsp;<br></p>
+<p><span class="title">专业设置</span> <span class="title">专业设置</span> <span class="title">专业设置</span> <br></p>

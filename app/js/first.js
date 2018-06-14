@@ -2,6 +2,7 @@ function getdatalist() {
     $.ajax({
         url: '/getAllContent',
         type: 'get',
+        cache:false,
         dataType: 'json',
         success: function (res) {
             //校园快讯
