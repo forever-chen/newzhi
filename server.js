@@ -1,5 +1,4 @@
 var http = require('http');
-
 var port = 18080;
 var fs = require('fs')
 var express = require('express');
@@ -8,7 +7,7 @@ var app = express();
 var multer = require('multer');
 var path = require('path');
 var fstream = require('fstream');
-var tar = require('tar');
+// var tar = require('tar');
 var zlib = require('zlib');
 // http.createServer(function(req, res){  
 //     // 发送 HTTP 头部  
@@ -23,7 +22,7 @@ var zlib = require('zlib');
 app.use(express.static(path.resolve(__dirname, 'app')))
 // app.use(express.static(path.resolve(__dirname, 'app')))
 
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 // parse application/x-www-form-urlencoded
 // app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
@@ -144,7 +143,7 @@ app.use('/getDetailContent', function (req, res) {
 
 
 // app.use('/downLoadFile', function (req, res) {
-//     const compressing = require('compressing');
+//     var compressing = require('compressing');
 //     compressing.tar.compressDir('./app/detailJson', './yasuo.tar');
 //     // compressing.tgz.uncompress('./yasuo.tar', 'path/to/destination/dir')
 // })
@@ -153,7 +152,7 @@ app.use('/getDetailContent', function (req, res) {
 var fileList = [];
 var fileName = [];
 var prev = '';
-function fileDisplay(filePath){
+function fileDisplay(filePath,res){
     //根据文件路径读取文件，返回文件列表
     fs.readdir(filePath,function(err,files){
         if(err){
@@ -195,8 +194,9 @@ function fileDisplay(filePath){
     });
     setTimeout(function(){
         compressFile()
-        console.log(fileList,fileName)
-    },10000)
+        console.log(fileList,fileName);
+        // console.log(res)
+    },5000)
 }
 
 function compressFile(){
@@ -206,7 +206,7 @@ function compressFile(){
     var myDate = presentDate.toLocaleDateString();//获取当前日期，eg:2017-02-08，以此日期为压缩包文件名
     var files = fileList;//将图片路径组合成数组形式，用for循环遍历
     //压缩后文件输出地址：/ARCHIVER/appData/files/，压缩包名：eg：2017-02-08.zip
-    var output = fs.createWriteStream('./yasuo' + '.zip');
+    var output = fs.createWriteStream('./app/yasuo.zip');
     //archiver可压缩为zip或tar格式，这里选择zip格式，注意这里新定义了一个变量archive，而不是原有的archiver包引用
     var archive = ARCHIVER('zip', {
         store: true
@@ -226,8 +226,9 @@ function compressFile(){
 
 
 app.use('/compress', function (req, res) {
-    fileDisplay('./app/detailJson')
-    fileDisplay('./app/upload-files')
+    fileDisplay('./app/detailJson',res);
+    fileDisplay('./app/upload-files',res);
+    
 })
 
 
@@ -236,24 +237,22 @@ app.use('/compress', function (req, res) {
 
 // 文章内容下载
 app.use('/downLoadFile', function (req, res) {
-    // fstream.Reader({path:'./app/detailJson',type:'Directory'})
-    // .pipe(tar.Pack({ noRepository: true, fromBase: true }))
-    // .pipe(zlib.Gzip()).pipe(res)
-    
-    // var dirName = './app/detailJson/'+req.query.type+'/'+req.query.title+'.txt'
-    var filePath = path.join(__dirname, './yasuo.zip');  
-    var stats = fs.statSync(filePath);  
-    var isFile = stats.isFile();  
+    var dirName = './app/detailJson/'+req.query.type+'/'+req.query.title+'.txt'
+    var filePath = path.join(__dirname, dirName);  
+    var stats = fs.statSync(filePath);      
+    var isFile = stats.isFile();
+    var title = req.query.title;
     if(isFile){  
         res.set({  
             'Content-Type': 'application/octet-stream',  
-            'Content-Disposition': 'attachment; filename=yasuo.zip'
-            // 'Content-Length': stats.size  
+            'Content-Disposition': "attachment; filename*=UTF-8''"+encodeURI(title)+'.txt',
+            'Content-Length': stats.size  
         });  
         fs.createReadStream(filePath,{encoding:'utf-8'}).pipe(res);  
     } else {  
         res.end(404);  
     }  
+    // res.download('./app/yasuo.zip');
 })
 var util = {
     objForEach: function (obj, fn) {
@@ -273,13 +272,13 @@ app.use('/upload', function (req, res, err) {
         console.log(err);
     }
     var imgLinks = []
-    const form = new formidable.IncomingForm();
+    var form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
         if (err) {
             return 'formidable, form.parse err'+err;
         }
         // 存储图片的文件夹
-        const storePath = path.resolve(__dirname,'app' ,'upload-files')
+        var storePath = path.resolve(__dirname,'app' ,'upload-files')
         if (!fs.existsSync(storePath)) {
             fs.mkdirSync(storePath)
         }
@@ -287,10 +286,10 @@ app.use('/upload', function (req, res, err) {
         // 遍历所有上传来的图片
         util.objForEach(files, function(name, file){
             // 图片临时位置
-            const tempFilePath = file.path 
+            var tempFilePath = file.path 
             // 图片名称和路径
-            const fileName = file.name
-            const fullFileName = path.join(storePath, fileName)
+            var fileName = file.name
+            var fullFileName = path.join(storePath, fileName)
             // 将临时文件保存为正式文件
             fs.renameSync(tempFilePath, fullFileName)
             // 存储链接

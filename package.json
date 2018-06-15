@@ -8,6 +8,8 @@
     },
     "dependencies": {
         "archiver": "^2.1.1",
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1",
         "body-parser": "^1.18.2",
         "compressing": "^1.2.3",
         "express": "^4.16.2",
